@@ -1,0 +1,193 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Manal's Cyber Oasis";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <style>
+            /* --- FUTURISTIC CYBERPUNK CSS --- */
+            :root {
+                --neon-cyan: #00f2fe;
+                --neon-pink: #4facfe;
+                --dark-bg: #030712;
+            }
+
+            body {
+                background-color: var(--dark-bg);
+                /* Grid background overlay for a digital, high-tech matrix vibe */
+                background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                background-size: 30px 30px;
+                color: #f3f4f6;
+                font-family: 'system-ui', -apple-system, sans-serif;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 0;
+                padding: 20px;
+                overflow-x: hidden;
+            }
+
+            /* Unique Neo-Brutalist / Glassmorphism Container */
+            .glass-deck {
+                position: relative;
+                text-align: center;
+                max-width: 850px;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.65);
+                padding: 50px 40px;
+                border-radius: 24px;
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 0 50px rgba(0, 242, 254, 0.1), 0 20px 50px rgba(0, 0, 0, 0.5);
+            }
+
+            /* H1 Letter Wrapper Styling */
+            h1 {
+                font-size: 3.5rem;
+                margin-bottom: 5px;
+                font-weight: 900;
+                letter-spacing: -1px;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                cursor: pointer;
+            }
+
+            /* Target classes for individual letter animations */
+            .animated-letter {
+                display: inline-block;
+                transition: transform 0.1s ease;
+                user-select: none;
+            }
+
+            .subtitle-badge {
+                display: inline-block;
+                background: linear-gradient(90deg, rgba(0,242,254,0.15), rgba(79,172,254,0.15));
+                border: 1px solid rgba(0, 242, 254, 0.3);
+                color: var(--neon-cyan);
+                padding: 6px 18px;
+                border-radius: 50px;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                margin-bottom: 45px;
+                box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            }
+
+            /* Sleek Video Frame with Custom Ambient Shadow Glow */
+            .video-wrapper {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+                .video-wrapper iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    filter: contrast(1.05) brightness(0.95);
+                }
+
+            footer {
+                margin-top: 40px;
+                font-size: 0.8rem;
+                color: #4b5563;
+                letter-spacing: 1px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="glass-deck">
+        <!-- The H1 target populated dynamically via JavaScript -->
+        <h1 id="manal-header">Manal Oraha</h1>
+        <div class="subtitle-badge">Audio-Visual Terminal</div>
+
+        <!-- Embedded Synthwave/Chill Radio for a unique mood match -->
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/4xDzrJKXOOY"
+                    title="Synthwave Music Video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <footer>
+            <p>// NODE_RELOADED_BY_MANAL_ORAHA_&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    <!-- --- COMPLEX JAVASCRIPT KINETIC ANIMATION LOOP --- -->
+    <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const header = document.getElementById("manal-header");
+                const text = header.innerText;
+                header.innerHTML = ""; // Clear plain text
+
+                // Step 1: Fragment the name into separate HTML span letters for independent control
+                const letterSpans = Array.from(text).map(char => {
+                    const span = document.createElement("span");
+                    span.innerText = char === " " ? "\u00A0" : char; // Handle spaces smoothly
+                    span.className = "animated-letter";
+                    header.appendChild(span);
+                    return span;
+                });
+
+                let timestamp = 0;
+
+                // Step 2: The Math-Driven Kinetic Animation Loop
+                function renderLoop() {
+                    timestamp += 0.04; // Controls animation loop velocity
+
+                    letterSpans.forEach((span, index) => {
+                        if (span.innerText === "\u00A0") return; // Skip spacing structures
+
+                        // Generate a cascading wave offset across the letters based on index
+                        const waveOffset = index * 0.4;
+
+                        // Math algorithms for independent movement vectors
+                        const yTranslation = Math.sin(timestamp + waveOffset) * 12; // Dynamic vertical bounce
+                        const rotAngle = Math.cos(timestamp + waveOffset) * 8;     // Oscillating rotational pivot
+                        const colorHue = Math.floor((timestamp * 25 + index * 20) % 360); // Infinite cascading color hue shift
+
+                        // Apply real-time matrices via CSS style injections
+                        span.style.transform = `translateY(${yTranslation}px) rotate(${rotAngle}deg)`;
+                        span.style.color = `hsl(${colorHue}, 95%, 65%)`;
+                        span.style.textShadow = `0 0 15px hsl(${colorHue}, 95%, 50%, 0.7)`;
+                    });
+
+                    // Request next frame execution natively from browser graphics architecture
+                    requestAnimationFrame(renderLoop);
+                }
+
+                // Interactive mouse-over effect: Kinetic distortion upon physical mouse passing
+                header.addEventListener("mousemove", (e) => {
+                    letterSpans.forEach(span => {
+                        const randomSquish = (Math.random() * 0.4) + 0.8;
+                        span.style.transform += ` scale(${randomSquish})`;
+                    });
+                });
+
+                // Engage loop engine
+                renderLoop();
+            });
+    </script>
+</body>
+</html>
